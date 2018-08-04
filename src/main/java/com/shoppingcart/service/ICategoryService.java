@@ -7,6 +7,8 @@ import com.shoppingcart.entity.Category;
 @Service
 public interface ICategoryService {
 	
-	Category findByTitle(String title);
+	public Category findByTitle(String title);
+
+	public Category addCategory(Category category);
 
 }

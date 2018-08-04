@@ -10,28 +10,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppingcart.entity.Category;
-import com.shoppingcart.entity.Product;
 import com.shoppingcart.service.ICategoryService;
-import com.shoppingcart.service.IProductService;
 
+/**
+ * @author umutates
+ * created on 2018-08-04
+ */
 @RestController
-@RequestMapping("/product")
-public class ProductRestController {
+@RequestMapping("/category")
+public class CategoryRestController {
 	
-	  @Autowired
-	  IProductService productService;
-	  
-	  @Autowired
+	 @Autowired
 	  ICategoryService categoryService;
 	  
 	  @PostMapping()
 	  @ResponseStatus(HttpStatus.CREATED)
-	  public ResponseEntity<Product> add(@RequestBody Product product) {
-        Category category=categoryService.findByTitle(product.getCategory().getTitle());
-        product.setCategory(category);
-	    product = productService.addProduct(product);
-
-	    return new ResponseEntity<>(product, HttpStatus.CREATED);
+	  public ResponseEntity<Category> add(@RequestBody Category category) { 
+        categoryService.addCategory(category);
+	    return new ResponseEntity<>(category, HttpStatus.CREATED);
 	  }
 
 }
