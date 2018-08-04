@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppingcart.entity.Campaign;
+import com.shoppingcart.entity.Category;
 import com.shoppingcart.service.ICampaignService;
+import com.shoppingcart.service.ICategoryService;
 
 /**
  * @author umutates
@@ -22,10 +24,15 @@ public class CampaignController {
 	
 	  @Autowired
 	  ICampaignService campaignService;
+	  
+	  @Autowired
+	  ICategoryService categoryService;
 	
 	  @PostMapping()
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public ResponseEntity<Campaign> add(@RequestBody Campaign campaign) { 
+		Category category=categoryService.findByTitle(campaign.getCategory().getTitle());
+	    campaign.setCategory(category);  
         campaign=campaignService.addCampaign(campaign);
 		 
 	    return new ResponseEntity<>(campaign, HttpStatus.CREATED);

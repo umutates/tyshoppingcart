@@ -1,7 +1,5 @@
 package com.shoppingcart.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -11,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shoppingcart.util.DiscountType;
 
 /**
@@ -27,7 +26,7 @@ public class Campaign extends BaseEntity {
 		super();
 	}
     
-    public Campaign(Category category,BigDecimal valueOfDiscount,DiscountType discountType,Integer lowerLimitOfApplyDiscount){
+    public Campaign(Category category,double valueOfDiscount,DiscountType discountType,Integer lowerLimitOfApplyDiscount){
     	this.setLuc(0l);
     	this.category=category;
     	this.valueOfDiscount=valueOfDiscount;
@@ -35,12 +34,12 @@ public class Campaign extends BaseEntity {
     	this.lowerLimitOfApplyDiscount=lowerLimitOfApplyDiscount;
     }
 	@NotNull
-	@ManyToOne(fetch=FetchType.EAGER,cascade= {CascadeType.MERGE,CascadeType.PERSIST})
+	@ManyToOne(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
 	private Category category;
 	
 	@NotNull
 	@PositiveOrZero
-	private BigDecimal valueOfDiscount;
+	private double valueOfDiscount;
 	
 	@NotNull
 	@PositiveOrZero
@@ -58,11 +57,11 @@ public class Campaign extends BaseEntity {
 		this.category = category;
 	}
 
-	public BigDecimal getValueOfDiscount() {
+	public double getValueOfDiscount() {
 		return valueOfDiscount;
 	}
 
-	public void setValueOfDiscount(BigDecimal valueOfDiscount) {
+	public void setValueOfDiscount(double valueOfDiscount) {
 		this.valueOfDiscount = valueOfDiscount;
 	}
 

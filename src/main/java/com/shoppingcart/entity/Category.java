@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author umutates
  * created on 2018-08-04
@@ -29,20 +31,9 @@ public class Category extends BaseEntity implements  Serializable {
 		this.title=title;
 	}
 	
-	@OneToMany(mappedBy="category",cascade= CascadeType.MERGE)
-	private Set<Product> products;
-	
 	@NotNull
 	@NotBlank
 	private String title;
-
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
 
 	public String getTitle() {
 		return title;

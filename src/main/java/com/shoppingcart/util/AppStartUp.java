@@ -32,7 +32,7 @@ public class AppStartUp implements ApplicationListener<ApplicationReadyEvent> {
 		category=categoryRepository.saveAndFlush(category);
 		Product product=new Product("ProteinBar",new BigDecimal(10), category);
 		productRepository.save(product);
-		Campaign campaign=new Campaign(category, new BigDecimal(20),DiscountType.PERCENTAGE,3);
+		Campaign campaign=new Campaign(category,20.0,DiscountType.PERCENTAGE,3);
 		campaignRepository.save(campaign);
 	}
 
