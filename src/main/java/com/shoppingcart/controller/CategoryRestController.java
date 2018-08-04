@@ -26,7 +26,7 @@ public class CategoryRestController {
 	  @PostMapping()
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public ResponseEntity<Category> add(@RequestBody Category category) { 
-        categoryService.addCategory(category);
+        category=categoryService.addCategory(category);
 	    return new ResponseEntity<>(category, HttpStatus.CREATED);
 	  }
 

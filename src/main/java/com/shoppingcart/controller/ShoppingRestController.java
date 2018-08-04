@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shoppingcart.dto.ResponseShopping;
 import com.shoppingcart.entity.ShoppingCart;
+import com.shoppingcart.util.ResponseShopping;
 
 @RestController
 @RequestMapping("/shopping")

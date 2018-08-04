@@ -1,4 +1,4 @@
-package com.shoppingcart.dto;
+package com.shoppingcart.util;
 
 public class ResponseShopping {
 
