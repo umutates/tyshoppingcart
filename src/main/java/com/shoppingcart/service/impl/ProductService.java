@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoppingcart.entity.Product;
-import com.shoppingcart.repository.ICategoryRepository;
 import com.shoppingcart.repository.IProductRepository;
 import com.shoppingcart.service.IProductService;
 
@@ -20,8 +19,8 @@ public class ProductService implements IProductService{
 	
 	@Override
 	public Product findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	   Product product=productRepository.findById(id).get();
+	   return product;
 	}
 
 	@Override

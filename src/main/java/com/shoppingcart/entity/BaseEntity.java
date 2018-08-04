@@ -19,7 +19,7 @@ public class BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@Version
 	private Long luc;
@@ -30,6 +30,10 @@ public class BaseEntity implements Serializable {
 
 	public void setLuc(Long luc) {
 		this.luc = luc;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 }

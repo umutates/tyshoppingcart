@@ -1,7 +1,7 @@
 package com.shoppingcart.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import javax.persistence.CascadeType;
@@ -23,29 +23,31 @@ public class ShoppingCart extends BaseEntity {
 	private static final long serialVersionUID = -8684492314198270936L;
 	
 	@NotEmpty
-	@ManyToMany(fetch=FetchType.EAGER,cascade= {CascadeType.MERGE,CascadeType.PERSIST})
-	private Set<Product> products;
+	@ManyToMany(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
+	private List<Product> products;
+	
+	private String cartOwner;
 	 
 	 
 	public ShoppingCart() {
-		products=new HashSet<>(); 
-		setItems(products);
+		products=new ArrayList<>();
+		setProducts(products);
 	 }
 	
-	public void addItem(Product product,Integer count) {
-		IntStream.range(0,count).mapToObj(i ->product).forEach(products::add);
-	}
-	
-	public void setItems(Set<Product> items) {
-		this.products = items;
-	}
-
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public String getCardOwner() {
+		return cartOwner;
+	}
+
+	public void setCardsOwner(String cardOwner) {
+		this.cartOwner = cardOwner;
 	}
 
 }
