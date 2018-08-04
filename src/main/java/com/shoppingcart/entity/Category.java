@@ -3,6 +3,7 @@ package com.shoppingcart.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -29,12 +30,11 @@ public class Category extends BaseEntity implements  Serializable {
 		this.title=title;
 	}
 	
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category",cascade= CascadeType.MERGE)
 	private Set<Product> products;
 	
 	@NotNull
 	@NotBlank
-	@Column(unique=true)
 	private String title;
 
 	public Set<Product> getProducts() {

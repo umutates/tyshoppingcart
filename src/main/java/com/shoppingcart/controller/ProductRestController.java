@@ -32,8 +32,8 @@ public class ProductRestController {
 	  @PostMapping()
 	  @ResponseStatus(HttpStatus.CREATED)
 	  public ResponseEntity<Product> add(@RequestBody Product product) {
-        Category category=categoryService.findByTitle(product.getTitle());  
-		product.setCategory(category);  
+        Category category=categoryService.findByTitle(product.getCategory().getTitle());
+        product.setCategory(category);
 	    product = productService.addProduct(product);
 
 	    return new ResponseEntity<>(product, HttpStatus.CREATED);

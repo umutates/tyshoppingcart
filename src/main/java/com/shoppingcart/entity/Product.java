@@ -47,8 +47,8 @@ public class Product extends BaseEntity {
     private BigDecimal reducedPrice;
     
     @NotNull
-	@ManyToOne(fetch=FetchType.EAGER,cascade= {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "fk_category")
+	@ManyToOne(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
+    @JoinColumn(name = "category_id")
     private Category category;
 
 	public String getTitle() {
