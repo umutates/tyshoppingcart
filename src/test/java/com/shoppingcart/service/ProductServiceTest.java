@@ -1,4 +1,4 @@
-package com.shoppingcart.servicetest;
+package com.shoppingcart.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;

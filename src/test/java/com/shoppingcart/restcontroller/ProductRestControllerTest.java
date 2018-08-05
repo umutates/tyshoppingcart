@@ -1,4 +1,4 @@
-package com.shoppingcart.controllertest;
+package com.shoppingcart.restcontroller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
