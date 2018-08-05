@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -26,7 +27,7 @@ public class Product extends BaseEntity {
       super();
 	}
     
-    public Product(String title,BigDecimal price,Category category) {
+    public Product(String title,double price,Category category) {
     	this.setLuc(0L);
     	this.title=title;
     	this.category=category;
@@ -39,10 +40,10 @@ public class Product extends BaseEntity {
 
 	@Positive 
     @NotNull 
-    private BigDecimal price;
+    private double price;
 	
-    @Positive
-    private BigDecimal reducedPrice;
+    @Transient
+    private double discountedPrice;
     
     @NotNull
 	@ManyToOne(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
@@ -57,20 +58,20 @@ public class Product extends BaseEntity {
 		this.title = title;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public BigDecimal getReducedPrice() {
-		return reducedPrice;
+	public double getDiscountedPrice() {
+		return discountedPrice;
 	}
 
-	public void setReducedPrice(BigDecimal reducedPrice) {
-		this.reducedPrice = reducedPrice;
+	public void setDiscountedPrice(double discountedPrice) {
+		this.discountedPrice = discountedPrice;
 	}
 
 	public Category getCategory() {

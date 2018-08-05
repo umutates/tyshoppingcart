@@ -6,5 +6,5 @@ package com.shoppingcart.util;
  * created on 2018-08-04
  */
 public enum DiscountType {
-	PERCENTAGE,PRICE;
+	AMOUNT,RATE;
 }

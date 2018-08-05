@@ -2,7 +2,6 @@ package com.shoppingcart.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,9 +25,6 @@ public class ShoppingCart extends BaseEntity {
 	@ManyToMany(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
 	private List<Product> products;
 	
-	private String cartOwner;
-	 
-	 
 	public ShoppingCart() {
 		products=new ArrayList<>();
 		setProducts(products);
@@ -40,14 +36,6 @@ public class ShoppingCart extends BaseEntity {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public String getCardOwner() {
-		return cartOwner;
-	}
-
-	public void setCardsOwner(String cardOwner) {
-		this.cartOwner = cardOwner;
 	}
 
 }

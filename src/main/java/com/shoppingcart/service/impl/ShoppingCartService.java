@@ -18,4 +18,9 @@ public class ShoppingCartService implements IShoppingCartService {
 		return shoppingCartRepository.save(shoppingCart);
 	}
 
+	@Override
+	public ShoppingCart findById(Long id) {
+		return shoppingCartRepository.findById(id).get();
+	}
+
 }

@@ -28,11 +28,17 @@ public class AppStartUp implements ApplicationListener<ApplicationReadyEvent> {
 	
 	
 	public void dataLoads() {
-		Category category=new Category("FOOD");
-		category=categoryRepository.saveAndFlush(category);
-		Product product=new Product("ProteinBar",new BigDecimal(10), category);
-		productRepository.save(product);
-		Campaign campaign=new Campaign(category,20.0,DiscountType.PERCENTAGE,3);
+		Category category1=new Category("FOOD");
+		category1=categoryRepository.saveAndFlush(category1);
+		Category category2=new Category("PC");
+		category2=categoryRepository.saveAndFlush(category2);
+		Product product1=new Product("ProteinBar1",10.0, category1);
+		productRepository.save(product1);
+		Product product2=new Product("ProteinBar2",11.0, category1);
+		productRepository.save(product2);
+		Product product3=new Product("ProteinBar3",12.0, category2);
+		productRepository.save(product3);
+		Campaign campaign=new Campaign(category1,20.0,DiscountType.RATE,3);
 		campaignRepository.save(campaign);
 	}
 

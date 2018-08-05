@@ -13,4 +13,6 @@ public interface IShoppingCartService {
 	
 	public ShoppingCart createShoppingCart(ShoppingCart shoppingCart);
 
+	public ShoppingCart findById(Long id);
+
 }
