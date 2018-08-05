@@ -1,5 +1,7 @@
 package com.shoppingcart.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class CampaignService implements ICampaignService {
 	@Override
 	public Campaign addCampaign(Campaign campaign) {
 	return campaignRepository.save(campaign);
+	}
+
+	@Override
+	public List<Campaign> findByCategoryId(Long categoryId) {
+    return campaignRepository.findByCategoryId(categoryId);
 	}
 
 }

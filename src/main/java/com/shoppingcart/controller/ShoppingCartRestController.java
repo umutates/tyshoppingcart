@@ -64,7 +64,7 @@ public class ShoppingCartRestController {
 	   @ResponseStatus(HttpStatus.OK)
 	   public ResponseEntity<ShoppingCart> calculateCartWithDiscount(@PathVariable Long id) {
 		ShoppingCart shoppingCart=shoppingCartService.findById(id);
-		cartCalculateService.calculate(shoppingCart);
+		cartCalculateService.calculateCartWithinDiscount(shoppingCart);
 		return new ResponseEntity<>(shoppingCart, HttpStatus.OK);
 	  }
 

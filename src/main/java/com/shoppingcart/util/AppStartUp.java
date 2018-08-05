@@ -38,7 +38,7 @@ public class AppStartUp implements ApplicationListener<ApplicationReadyEvent> {
 		productRepository.save(product2);
 		Product product3=new Product("ProteinBar3",12.0, category2);
 		productRepository.save(product3);
-		Campaign campaign=new Campaign(category1,20.0,DiscountType.RATE,3);
+		Campaign campaign=new Campaign(category1,20.0,DiscountType.RATE,1);
 		campaignRepository.save(campaign);
 	}
 

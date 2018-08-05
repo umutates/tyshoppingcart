@@ -1,7 +1,7 @@
 package com.shoppingcart.service;
 
+import com.shoppingcart.entity.ResponseShoppingBill;
 import com.shoppingcart.entity.ShoppingCart;
-import com.shoppingcart.util.ResponseShopping;
 
 /**
  * @author umutates
@@ -9,6 +9,6 @@ import com.shoppingcart.util.ResponseShopping;
  */
 public interface IShoppingCartCalculateService {
 	
-	public ResponseShopping calculate(ShoppingCart shoppingCart);
+	public ResponseShoppingBill calculateCartWithinDiscount(ShoppingCart shoppingCart);
 
 }

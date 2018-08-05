@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,7 @@ public class Campaign extends BaseEntity {
     }
 	@NotNull
 	@ManyToOne(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
+	@JoinColumn(name = "category_id")
 	private Category category;
 	
 	@NotNull

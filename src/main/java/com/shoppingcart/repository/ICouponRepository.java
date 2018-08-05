@@ -4,14 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shoppingcart.entity.ShoppingCart;
+import com.shoppingcart.entity.Coupon;
 
 /**
  * @author umutates
- * created on 2018-08-04
+ * created on 2018-08-05
  */
 @Transactional
 @Repository
-public interface IShoppingCartRepository extends JpaRepository<ShoppingCart, Long>{
+public interface ICouponRepository extends JpaRepository<Coupon,Long> {
 
 }
