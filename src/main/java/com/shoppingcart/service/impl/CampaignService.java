@@ -24,5 +24,10 @@ public class CampaignService implements ICampaignService {
 	public List<Campaign> findByCategoryId(Long categoryId) {
     return campaignRepository.findByCategoryId(categoryId);
 	}
+    
+	@Override
+	public List<Campaign> findAllCampaign() {
+		return campaignRepository.findAll();
+	}
 
 }

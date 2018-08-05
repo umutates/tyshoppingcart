@@ -29,6 +29,10 @@ import com.shoppingcart.entity.Product;
 import com.shoppingcart.service.ICategoryService;
 import com.shoppingcart.service.IProductService;
 
+/**
+ * @author umutates
+ * created on 2018-08-05
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = ProductRestController.class)
 public class ProductRestControllerTest {

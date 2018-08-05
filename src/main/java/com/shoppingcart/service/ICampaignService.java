@@ -8,6 +8,8 @@ public interface ICampaignService {
 	public Campaign addCampaign(Campaign campaign);
 
 	public List<Campaign> findByCategoryId(Long categoryId);
+
+	public List<Campaign> findAllCampaign();
 	
 
 }

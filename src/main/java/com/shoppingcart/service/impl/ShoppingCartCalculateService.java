@@ -3,6 +3,7 @@ package com.shoppingcart.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,12 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
 		shoppingCart.getProducts().forEach(product->{
 			responseShoppingBill.setTotalAmount(responseShoppingBill.getTotalAmount()+product.getPrice());
 			responseShoppingBill.setTotalAmountAfterDiscounts(responseShoppingBill.getTotalAmountAfterDiscounts()+product.getDiscountedPrice());
-		    responseShoppingBill.setCampaignDiscount(responseShoppingBill.getTotalAmount()-responseShoppingBill.getTotalAmountAfterDiscounts());
-		    responseShoppingBill.setCouponDiscount(getCouponDiscount(responseShoppingBill.getTotalAmount(),shoppingCart.getCouponId()));
-		    responseShoppingBill.setTotalAmountAfterDiscounts(responseShoppingBill.getTotalAmountAfterDiscounts()-responseShoppingBill.getCouponDiscount());
-		    responseShoppingBill.setProductByCategory(productsByCategory);
+
 		});
+	    responseShoppingBill.setCampaignDiscount(responseShoppingBill.getTotalAmount()-responseShoppingBill.getTotalAmountAfterDiscounts());
+	    responseShoppingBill.setCouponDiscount(getCouponDiscount(responseShoppingBill.getTotalAmountAfterDiscounts(),shoppingCart.getCouponId()));
+	    responseShoppingBill.setTotalAmountAfterDiscounts(responseShoppingBill.getTotalAmountAfterDiscounts()-responseShoppingBill.getCouponDiscount());
+	    responseShoppingBill.setProductByCategory(productsByCategory);
 		return responseShoppingBill;
   }
  
@@ -72,11 +74,13 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
   
   private void applyDiscountByGroup(List<Product> products,Long categoryId) {
 	  List<Campaign> campaignList=campaignService.findByCategoryId(categoryId);
-	  campaignList.stream().filter(campaign->campaign.getLowerLimitOfApplyDiscount()<=products.size()).forEach(campaign->{products.forEach(product->applyDiscount(product,campaign));});
+	  campaignList=campaignList.stream().filter(campaign->campaign.getLowerLimitOfApplyDiscount()<=products.size()).collect(Collectors.toList());
+	  campaignList.forEach(campaign->{products.forEach(product->applyDiscount(product, campaign));});
   }
 
  private void applyDiscount(Product product,Campaign campaign) {
 	 double discount=(campaign.getDiscountType()==DiscountType.RATE?product.getPrice()*(campaign.getValueOfDiscount())/100:campaign.getValueOfDiscount());
+	 System.out.println(discount);
 	 product.setDiscountedPrice(product.getDiscountedPrice()-discount); 
  }
 

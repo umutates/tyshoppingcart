@@ -3,6 +3,7 @@ package com.shoppingcart.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ import com.shoppingcart.service.IProductService;
 @RequestMapping("/product")
 public class ProductRestController {
 	
+	  private final static String DELETE_MESSAGE="Delete operation success!";
+	
 	  @Autowired
 	  IProductService productService;
 	  
@@ -32,6 +35,13 @@ public class ProductRestController {
 	    product = productService.addProduct(product);
 
 	    return new ResponseEntity<>(product, HttpStatus.CREATED);
+	  }
+	  
+	  @DeleteMapping
+	  @ResponseStatus(HttpStatus.OK)
+	  public ResponseEntity<String> delete(@RequestBody Long id) {
+        productService.deleteProduct(id);
+	    return new ResponseEntity<>(DELETE_MESSAGE, HttpStatus.OK);
 	  }
 
 }

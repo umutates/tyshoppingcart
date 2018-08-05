@@ -20,6 +20,10 @@ import com.shoppingcart.repository.IProductRepository;
 import com.shoppingcart.service.impl.ProductService;
 import com.shoppingcart.util.GenericException;
 
+/**
+ * @author umutates
+ * created on 2018-08-05
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
 	@Mock
@@ -65,7 +69,7 @@ public class ProductServiceTest {
 		 
 		 List<Product> result=productService.findAllProduct();
 		 
-		 assertThat(result).isEqualTo(result);
+		 assertThat(result).isEqualTo(products);
 	 }
 	 
 	 @Test
