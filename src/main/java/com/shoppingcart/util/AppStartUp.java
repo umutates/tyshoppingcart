@@ -1,7 +1,5 @@
 package com.shoppingcart.util;
 
-import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -9,9 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.shoppingcart.entity.Campaign;
 import com.shoppingcart.entity.Category;
+import com.shoppingcart.entity.Coupon;
 import com.shoppingcart.entity.Product;
 import com.shoppingcart.repository.ICampaignRepository;
 import com.shoppingcart.repository.ICategoryRepository;
+import com.shoppingcart.repository.ICouponRepository;
 import com.shoppingcart.repository.IProductRepository;
 
 @Component
@@ -25,6 +25,9 @@ public class AppStartUp implements ApplicationListener<ApplicationReadyEvent> {
     
     @Autowired
     ICategoryRepository categoryRepository;
+    
+    @Autowired
+    ICouponRepository couponRepository;
 	
 	
 	public void dataLoads() {
@@ -40,11 +43,13 @@ public class AppStartUp implements ApplicationListener<ApplicationReadyEvent> {
 		productRepository.save(product3);
 		Campaign campaign=new Campaign(category1,20.0,DiscountType.RATE,1);
 		campaignRepository.save(campaign);
+		Coupon coupon=new Coupon(10, 20,DiscountType.RATE);
+		couponRepository.save(coupon);
 	}
 
 
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent arg0) {
-	dataLoads();
+	      dataLoads();
 	}
 }

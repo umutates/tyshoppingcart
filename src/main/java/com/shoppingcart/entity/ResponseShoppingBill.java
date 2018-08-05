@@ -1,5 +1,8 @@
 package com.shoppingcart.entity;
 
+import java.util.List;
+import java.util.Map;
+
 public class ResponseShoppingBill {
 	
 	private double totalAmount=0;
@@ -9,6 +12,10 @@ public class ResponseShoppingBill {
 	private double campaignDiscount=0;
 	
 	private double couponDiscount=0;
+	
+	private double deliveryAmount;
+	
+	private Map<Long,List<Product>> productsByCategory;
 	
 	public double getTotalAmount() {
 		return totalAmount;
@@ -50,6 +57,14 @@ public class ResponseShoppingBill {
 		this.deliveryAmount = deliveryAmount;
 	}
 
-	private double deliveryAmount;
+	public Map<Long,List<Product>> getProductByCategory() {
+		return productsByCategory;
+	}
+
+	public void setProductByCategory(Map<Long,List<Product>> productByCategory) {
+		this.productsByCategory = productByCategory;
+	}
+
+	
 
 }

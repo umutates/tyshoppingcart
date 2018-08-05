@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoppingcart.entity.Product;
+import com.shoppingcart.entity.ResponseShoppingBill;
 import com.shoppingcart.entity.ShoppingCart;
+import com.shoppingcart.service.ICouponService;
 import com.shoppingcart.service.IProductService;
 import com.shoppingcart.service.IShoppingCartCalculateService;
 import com.shoppingcart.service.IShoppingCartService;
@@ -38,6 +40,9 @@ public class ShoppingCartRestController {
 	  
 	  @Autowired
 	  IShoppingCartCalculateService cartCalculateService;
+	  
+	  @Autowired
+	  ICouponService couponService;
 
 	  @PostMapping("/cart")
 	  @ResponseStatus(HttpStatus.CREATED)
@@ -62,10 +67,10 @@ public class ShoppingCartRestController {
 	   
 	   @GetMapping(value = "/cart/calculate/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	   @ResponseStatus(HttpStatus.OK)
-	   public ResponseEntity<ShoppingCart> calculateCartWithDiscount(@PathVariable Long id) {
+	   public ResponseEntity<ResponseShoppingBill> calculateCartWithDiscount(@PathVariable Long id) {
 		ShoppingCart shoppingCart=shoppingCartService.findById(id);
-		cartCalculateService.calculateCartWithinDiscount(shoppingCart);
-		return new ResponseEntity<>(shoppingCart, HttpStatus.OK);
+		ResponseShoppingBill responseShoppingBill=cartCalculateService.calculateCartWithinDiscount(shoppingCart);
+		return new ResponseEntity<>(responseShoppingBill, HttpStatus.OK);
 	  }
 
 

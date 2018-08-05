@@ -1,5 +1,7 @@
 package com.shoppingcart.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.shoppingcart.entity.Product;
@@ -13,8 +15,9 @@ public interface IProductService {
 	
 	public void updateProduct(Product product);
 	
-	public void removeProduct(Long id);
-	
+	public List<Product> findAllProduct();
+
+	public void deleteProduct(Long id);
 	
 
 }

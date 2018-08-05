@@ -6,7 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -25,6 +29,8 @@ public class ShoppingCart extends BaseEntity {
 	@ManyToMany(fetch=FetchType.EAGER,cascade= CascadeType.MERGE)
 	private List<Product> products;
 	
+	private Long couponId;
+	
 	public ShoppingCart() {
 		products=new ArrayList<>();
 		setProducts(products);
@@ -36,6 +42,14 @@ public class ShoppingCart extends BaseEntity {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public Long getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(Long couponId) {
+		this.couponId = couponId;
 	}
 
 }

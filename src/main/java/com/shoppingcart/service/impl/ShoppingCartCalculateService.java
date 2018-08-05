@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoppingcart.entity.Campaign;
+import com.shoppingcart.entity.Coupon;
 import com.shoppingcart.entity.Product;
 import com.shoppingcart.entity.ResponseShoppingBill;
 import com.shoppingcart.entity.ShoppingCart;
 import com.shoppingcart.service.ICampaignService;
+import com.shoppingcart.service.ICouponService;
 import com.shoppingcart.service.IShoppingCartCalculateService;
 import com.shoppingcart.service.IShoppingCartService;
 import com.shoppingcart.util.DiscountType;
@@ -25,6 +27,9 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
 	
 	@Autowired
 	IShoppingCartService shoppingCartService;
+	
+	@Autowired
+	ICouponService couponService;
 
 	@Override
 	public ResponseShoppingBill calculateCartWithinDiscount(ShoppingCart shoppingCart) {
@@ -36,16 +41,22 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
 			responseShoppingBill.setTotalAmount(responseShoppingBill.getTotalAmount()+product.getPrice());
 			responseShoppingBill.setTotalAmountAfterDiscounts(responseShoppingBill.getTotalAmountAfterDiscounts()+product.getDiscountedPrice());
 		    responseShoppingBill.setCampaignDiscount(responseShoppingBill.getTotalAmount()-responseShoppingBill.getTotalAmountAfterDiscounts());
-		    responseShoppingBill.setTotalAmountAfterDiscounts(applyCoupon(responseShoppingBill.getTotalAmountAfterDiscounts()));
+		    responseShoppingBill.setCouponDiscount(getCouponDiscount(responseShoppingBill.getTotalAmount(),shoppingCart.getCouponId()));
+		    responseShoppingBill.setTotalAmountAfterDiscounts(responseShoppingBill.getTotalAmountAfterDiscounts()-responseShoppingBill.getCouponDiscount());
+		    responseShoppingBill.setProductByCategory(productsByCategory);
 		});
-		return null;
+		return responseShoppingBill;
   }
  
-	private double applyCoupon(double shoppingAmount) {
-		return shoppingAmount;
-		// TODO Auto-generated method stub
-		
+	private double getCouponDiscount(double cartAmount,Long couponId) {
+		Coupon coupon=couponService.findById(couponId);
+		if (coupon==null) {
+			return 0;
+		}
+		double discount=cartAmount>coupon.getMinCartAmount()?(coupon.getDiscountType()==DiscountType.RATE?cartAmount*(coupon.getValueOfDiscount())/100:coupon.getValueOfDiscount()):0;
+		return discount;
 	}
+	
 
 	private Map<Long, List<Product>> getProductsByCategory(List<Product> products){
 	Map<Long,List<Product>>productsByCategoryMap=new HashMap<>();

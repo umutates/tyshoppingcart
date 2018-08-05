@@ -20,7 +20,7 @@ import com.shoppingcart.service.ICategoryService;
  */
 @RestController
 @RequestMapping("/campaign")
-public class CampaignController {
+public class CampaignRestController {
 	
 	  @Autowired
 	  ICampaignService campaignService;

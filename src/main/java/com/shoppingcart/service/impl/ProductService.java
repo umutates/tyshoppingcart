@@ -1,11 +1,14 @@
 package com.shoppingcart.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoppingcart.entity.Product;
 import com.shoppingcart.repository.IProductRepository;
 import com.shoppingcart.service.IProductService;
+import com.shoppingcart.util.GenericException;
 
 /**
  * @author umutates
@@ -19,7 +22,7 @@ public class ProductService implements IProductService{
 	
 	@Override
 	public Product findById(Long id) {
-	   Product product=productRepository.findById(id).get();
+	   Product product=productRepository.findById(id).orElseThrow(() -> new GenericException(this.getClass(), "this object not found!"));
 	   return product;
 	}
 
@@ -35,9 +38,14 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public void removeProduct(Long id) {
-		// TODO Auto-generated method stub
-		
+	public void deleteProduct(Long id) {
+		Product product=findById(id);
+		productRepository.delete(product);
+	}
+    
+	@Override
+	public List<Product> findAllProduct() {
+         return productRepository.findAll();		
 	}
 
 }
