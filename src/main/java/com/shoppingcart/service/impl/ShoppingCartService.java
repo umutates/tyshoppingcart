@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.shoppingcart.entity.ShoppingCart;
 import com.shoppingcart.repository.IShoppingCartRepository;
 import com.shoppingcart.service.IShoppingCartService;
+import com.shoppingcart.util.GenericException;
 
 @Service
 public class ShoppingCartService implements IShoppingCartService {
@@ -20,7 +21,7 @@ public class ShoppingCartService implements IShoppingCartService {
 
 	@Override
 	public ShoppingCart findById(Long id) {
-		return shoppingCartRepository.findById(id).get();
+		return shoppingCartRepository.findById(id).orElseThrow(() -> new GenericException(this.getClass(), "this object not found!"));
 	}
 
 }
