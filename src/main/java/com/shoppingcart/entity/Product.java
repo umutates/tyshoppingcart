@@ -1,7 +1,5 @@
 package com.shoppingcart.entity;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
