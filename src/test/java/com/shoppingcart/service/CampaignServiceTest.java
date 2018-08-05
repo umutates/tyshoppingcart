@@ -3,7 +3,6 @@ package com.shoppingcart.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import com.shoppingcart.entity.Category;
 import com.shoppingcart.repository.ICampaignRepository;
 import com.shoppingcart.service.impl.CampaignService;
 import com.shoppingcart.util.DiscountType;
-import com.shoppingcart.util.GenericException;
 
 /**
  * @author umutates

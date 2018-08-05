@@ -102,27 +102,27 @@ public class ShoppingCartCalculateServiceTest {
 	    
 	  }
 	 
-//	 @Test
-//	 public void shoulGetShoppingCartTotalAmountTrueWhenCallCalculateService() {
-//		
-//		 when(campaignService.findByCategoryId(Mockito.any())).thenReturn(campaigns);
-//		 when(couponService.findById(shoppingCarts.get(0).getCouponId())).thenReturn(coupons.get(0));
-//	    
-//		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(0));
-//	   
-//		assertThat(responseShoppingBill.getTotalAmount()).isEqualTo(56);
-//	    
-//	  }
-//	 
-//	 @Test
-//	 public void shoulGetShoppingCartTotalAmountTrueWhenCallCalculateService() {
-//		
-//		 when(campaignService.findByCategoryId(Mockito.any())).thenReturn(campaigns);
-//		 when(couponService.findById(shoppingCarts.get(0).getCouponId())).thenReturn(coupons.get(0));
-//	    
-//		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(0));
-//	   
-//		assertThat(responseShoppingBill.getTotalAmount()).isEqualTo(56);
-//	    
-//	  }
+	 @Test
+	 public void shoulGetShoppingCartCampaingDiscountAmountTrueWhenCallCalculateService() {
+		
+		 when(campaignService.findByCategoryId(Mockito.any())).thenReturn(campaigns);
+		 when(couponService.findById(shoppingCarts.get(0).getCouponId())).thenReturn(coupons.get(0));
+	    
+		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(0));
+	   
+		assertThat(new BigDecimal(responseShoppingBill.getCampaignDiscount()).setScale(2,RoundingMode.HALF_UP).doubleValue()).isEqualTo(25.80);
+	    
+	  }
+	 
+	 @Test
+	 public void shoulGetShoppingCartCouponDiscountTrueWhenCallCalculateService() {
+		
+		 when(campaignService.findByCategoryId(Mockito.any())).thenReturn(campaigns);
+		 when(couponService.findById(shoppingCarts.get(0).getCouponId())).thenReturn(coupons.get(0));
+	    
+		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(0));
+	   
+		assertThat(new BigDecimal(responseShoppingBill.getCouponDiscount()).setScale(2,RoundingMode.HALF_UP).doubleValue()).isEqualTo(3.02);
+	    
+	  }
 }
