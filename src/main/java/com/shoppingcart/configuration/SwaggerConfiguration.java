@@ -2,7 +2,7 @@ package com.shoppingcart.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,15 +12,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
-public class SwaggerConfiguration extends WebMvcConfigurationSupport {
+public class SwaggerConfiguration  {
 	
-	   @Bean
-	  public Docket apiDocket() {
-	    return new Docket(DocumentationType.SWAGGER_2)
-	        .select()
-	        .apis(RequestHandlerSelectors.any())
-	        .paths(PathSelectors.any())
-	        .build();
-	  }
+	@Bean
+    public Docket productApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select().apis(RequestHandlerSelectors.basePackage("com.shoppingcart.controller")).paths(PathSelectors.any())
+                .build();
+    }
 
 }
