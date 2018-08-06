@@ -76,7 +76,7 @@ public class ShoppingCartCalculateServiceTest {
 		campaigns=Arrays.asList(new Campaign(categories.get(0), 10, DiscountType.RATE,1),
 	               new Campaign(categories.get(0), 3, DiscountType.AMOUNT,2),
 	               new Campaign(categories.get(0), 20, DiscountType.RATE,1));
-		shoppingCarts=Arrays.asList(new ShoppingCart(products,1L),new ShoppingCart(null,1L),new ShoppingCart(Arrays.asList(products.get(3),products.get(4)),1L));
+		shoppingCarts=Arrays.asList(new ShoppingCart(Arrays.asList(products.get(0),products.get(1),products.get(2)),1L),new ShoppingCart(null,1L),new ShoppingCart(Arrays.asList(products.get(3),products.get(4)),1L));
 		coupons=Arrays.asList(new Coupon(10, 20,DiscountType.RATE));
 		
 	}
