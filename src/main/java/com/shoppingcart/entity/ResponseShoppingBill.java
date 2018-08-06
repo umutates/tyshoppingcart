@@ -1,8 +1,13 @@
 package com.shoppingcart.entity;
 
+
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author umutates
+ * created on 2018-08-04
+ */
 public class ResponseShoppingBill {
 	
 	private double totalAmount=0;

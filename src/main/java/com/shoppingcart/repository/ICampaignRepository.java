@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppingcart.entity.Campaign;
 
+/**
+ * @author umutates
+ * created on 2018-08-04
+ */
 @Transactional
 @Repository
 public interface ICampaignRepository extends JpaRepository<Campaign,Long>{

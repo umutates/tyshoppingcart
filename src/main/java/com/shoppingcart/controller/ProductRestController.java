@@ -15,6 +15,10 @@ import com.shoppingcart.entity.Product;
 import com.shoppingcart.service.ICategoryService;
 import com.shoppingcart.service.IProductService;
 
+/**
+ * @author umutates
+ * created on 2018-08-04
+ */
 @RestController
 @RequestMapping("/product")
 public class ProductRestController {
