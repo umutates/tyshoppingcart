@@ -69,11 +69,14 @@ public class ShoppingCartCalculateServiceTest {
 		categories.get(1).setId(2L);
 		products=Arrays.asList(new Product("ProteinBar1",10.0, categories.get(0)),
 				               new Product("ProteinBar2",24.0,categories.get(0)), 
-				               new Product("ProteinBar3",22.0,categories.get(0)));
+				               new Product("ProteinBar3",22.0,categories.get(0)),
+				               new Product("ProteinBar4",12.0,categories.get(1)),
+				               new Product("ProteinBar5",11.0,categories.get(1)));
+		
 		campaigns=Arrays.asList(new Campaign(categories.get(0), 10, DiscountType.RATE,1),
 	               new Campaign(categories.get(0), 3, DiscountType.AMOUNT,2),
 	               new Campaign(categories.get(0), 20, DiscountType.RATE,1));
-		shoppingCarts=Arrays.asList(new ShoppingCart(products,1L));
+		shoppingCarts=Arrays.asList(new ShoppingCart(products,1L),new ShoppingCart(null,1L),new ShoppingCart(Arrays.asList(products.get(3),products.get(4)),1L));
 		coupons=Arrays.asList(new Coupon(10, 20,DiscountType.RATE));
 		
 	}
@@ -125,4 +128,24 @@ public class ShoppingCartCalculateServiceTest {
 		assertThat(new BigDecimal(responseShoppingBill.getCouponDiscount()).setScale(2,RoundingMode.HALF_UP).doubleValue()).isEqualTo(3.02);
 	    
 	  }
+	 
+	 @Test
+	 public void shouldNotThrowExceptionWhenCalculateServiceCartCallHasNotProduct() {
+		
+		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(1));
+	   
+		assertThat(responseShoppingBill.getTotalAmount()).isEqualTo(0.0);
+	    
+	  }
+	 
+	 @Test
+	 public void shouldNotThrowExceptionWhenCalculateServiceCartCallHasNotCampaign() {
+		when(couponService.findById(shoppingCarts.get(0).getCouponId())).thenReturn(coupons.get(0));
+		ResponseShoppingBill responseShoppingBill=shoppingCartCalculateService.calculateCartWithinDiscount(shoppingCarts.get(2));
+	   
+		assertThat(responseShoppingBill.getTotalAmountAfterDiscounts()).isEqualTo(20.7);
+	    
+	  }
+	 
+	 
 }

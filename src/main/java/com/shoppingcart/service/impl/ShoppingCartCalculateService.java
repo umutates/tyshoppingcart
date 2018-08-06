@@ -34,6 +34,9 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
 	@Override
 	public ResponseShoppingBill calculateCartWithinDiscount(ShoppingCart shoppingCart) {
 		ResponseShoppingBill responseShoppingBill=new ResponseShoppingBill();
+		if (shoppingCart.getProducts()==null||shoppingCart.getProducts().isEmpty()) {
+			return responseShoppingBill;
+		}
 		shoppingCart.getProducts().forEach(product -> product.setDiscountedPrice(product.getPrice()));
 		Map<Long,List<Product>> productsByCategory=getProductsByCategory(shoppingCart.getProducts());
 		productsByCategory.forEach((k,v)->applyDiscountByGroup(v,k));
@@ -50,6 +53,9 @@ public class ShoppingCartCalculateService implements IShoppingCartCalculateServi
   }
  
 	private double getCouponDiscount(double cartAmount,Long couponId) {
+		if (couponId==null) {
+			return 0;
+		}
 		Coupon coupon=couponService.findById(couponId);
 		if (coupon==null) {
 			return 0;
